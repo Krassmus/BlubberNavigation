@@ -6,7 +6,7 @@ form#quicksearch {
     margin-right: auto;
     text-align: center;
     width: 100%;
-    top: 30px;
+    top: 5px;
 }
 #barTopMenu li {
     display: inline-block;
@@ -17,4 +17,7 @@ form#quicksearch {
 }
 #barTopStudip img {
     display: none;
+}
+#header {
+    height: 60px;
 }
