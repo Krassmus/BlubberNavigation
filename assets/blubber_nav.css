@@ -4,6 +4,7 @@ form#quicksearch {
 #barTopMenu {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 #barTopStudip {
     display: none;
