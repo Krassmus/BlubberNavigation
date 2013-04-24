@@ -27,6 +27,9 @@ class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
         if (Navigation::hasItem("/footer/blog")) {
             Navigation::removeItem("/footer/blog");
         }
+        if (Navigation::hasItem("/tools")) {
+            Navigation::getItem("/tools")->setImage(null);
+        }
         if ($GLOBALS['i_page'] === "index.php" && $GLOBALS['user']->id !== "nobody") {
             header("Location: ". Navigation::getItem("/community")->getURL());
         }
