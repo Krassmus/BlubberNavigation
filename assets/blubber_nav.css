@@ -21,3 +21,9 @@ form#quicksearch {
 #header {
     height: 60px;
 }
+#barBottomright .list.below {
+    left: -243px;
+}
+#barBottomright .list.below:before {
+    left: 62%;
+}
