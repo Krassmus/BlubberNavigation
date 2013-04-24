@@ -10,6 +10,7 @@ form#quicksearch {
 }
 #barTopMenu li {
     display: inline-block;
+    float: none;
 }
 #barTopStudip {
     display: none;
