@@ -5,6 +5,11 @@ form#quicksearch {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    width: 100%;
+    top: 30px;
+}
+#barTopMenu li {
+    display: inline-block;
 }
 #barTopStudip {
     display: none;
