@@ -34,5 +34,45 @@ class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
             header("Location: ". Navigation::getItem("/community")->getURL());
         }
         PageLayout::addHeadElement("link", array('rel' => "stylesheet", "href" => $this->getPluginURL()."/assets/blubber_nav.css"));
+    
+        //Customized Loginscreen and loginprocess
+        if (!$GLOBALS['perm']->have_perm("user") && Request::get('again') === "yes") {
+            $uid = $GLOBALS['auth']->auth_validatelogin();
+            if ($uid) {
+                $GLOBALS['auth']->auth["uid"] = $uid;
+                $GLOBALS['auth']->auth["exp"] = time() + (60 * $GLOBALS['auth']->lifetime);
+                $GLOBALS['auth']->auth["refresh"] = time() + (60 * $GLOBALS['auth']->refresh);
+                $GLOBALS['sess']->regenerate_session_id(array('auth', 'forced_language','_language'));
+                $GLOBALS['sess']->freeze();
+                header("Location: ".URLHelper::getURL("plugins.php/blubber/streams/global", array(), true));
+            }
+        }
+        if (!$GLOBALS['perm']->have_perm("user")) {
+            if (Request::get("loginname")) {
+                PageLayout::postMessage(MessageBox::error(_("Falsches Passwort oder Nutzername")));
+            }
+            $template = $this->getTemplate("login_screen.php");
+            PageLayout::setTitle(_("Login"));
+            $template->set_attribute("plugin", $this);
+            echo $template->render();
+            page_close();
+            die();
+        }
+    }
+    
+    protected function getTemplate($template_file_name, $layout = "without_infobox") {
+        if (!$this->template_factory) {
+            $this->template_factory = new Flexi_TemplateFactory(dirname(__file__)."/templates");
+        }
+        $template = $this->template_factory->open($template_file_name);
+        if ($layout) {
+            if (method_exists($this, "getDisplayName")) {
+                PageLayout::setTitle($this->getDisplayName());
+            } else {
+                PageLayout::setTitle(get_class($this));
+            }
+            $template->set_layout($GLOBALS['template_factory']->open($layout === "without_infobox" ? 'layouts/base_without_infobox' : 'layouts/base'));
+        }
+        return $template;
     }
 }
