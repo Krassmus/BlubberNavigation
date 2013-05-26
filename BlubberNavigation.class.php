@@ -47,7 +47,7 @@ class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
                 header("Location: ".URLHelper::getURL("plugins.php/blubber/streams/global", array(), true));
             }
         }
-        if (!$GLOBALS['perm']->have_perm("user")) {
+        if (!$GLOBALS['perm']->have_perm("user") && stripos($_SERVER['SCRIPT_FILENAME'], "index.php") !== false) {
             if (Request::get("loginname")) {
                 PageLayout::postMessage(MessageBox::error(_("Falsches Passwort oder Nutzername")));
             }
