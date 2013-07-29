@@ -3,6 +3,9 @@
 class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
     public function __construct() {
         parent::__construct();
+        if ($GLOBALS['user']->id === "nobody" && $_SERVER['SERVER_NAME'] === "blubber.it") {
+            header("Location: http://www.blubber.it");
+        }
         if (Navigation::hasItem("/start") && Navigation::hasItem("/community")) {
             $nav = Navigation::getItem("/community");
             Navigation::removeItem("/community");
