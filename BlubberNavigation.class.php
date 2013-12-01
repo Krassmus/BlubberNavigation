@@ -11,7 +11,7 @@ class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
             Navigation::removeItem("/community");
             Navigation::insertItem("/community", $nav, "start");
             $start = Navigation::getItem("/start");
-            $start->initItem();
+            $start->getImage();
             $start->setImage(null);
         }
         if (Navigation::hasItem("/search/users")) {
