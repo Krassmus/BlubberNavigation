@@ -27,3 +27,6 @@ form#quicksearch {
 #barBottomright .list.below:before {
     left: 62%;
 }
+#layout_container {
+    padding-top: 15px;
+}
