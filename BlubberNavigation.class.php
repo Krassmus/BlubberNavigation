@@ -38,7 +38,7 @@ class BlubberNavigation extends StudIPPlugin implements SystemPlugin {
         if (Navigation::hasItem("/admin/config")) {
             Navigation::getItem("/admin")->setURL(Navigation::getItem("/admin/config")->getURL());
         }
-        if ($GLOBALS['i_page'] === "index.php" && $GLOBALS['user']->id !== "nobody") {
+        if (($GLOBALS['i_page'] === "index.php" || stripos($_SERVER['SCRIPT_FILENAME'], "dispatch.php/start") !== false) && $GLOBALS['user']->id !== "nobody") {
             header("Location: ". Navigation::getItem("/community")->getURL());
         }
         PageLayout::addHeadElement("link", array('rel' => "stylesheet", "href" => $this->getPluginURL()."/assets/blubber_nav.css"));
